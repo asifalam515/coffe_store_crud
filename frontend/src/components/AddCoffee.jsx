@@ -34,6 +34,7 @@ const AddCoffee = () => {
         console.log(data);
         if (data.insertedId) {
           Swal.fire("Added!", "Coffee Added Successfully", "success");
+          form.reset();
         }
       });
   };

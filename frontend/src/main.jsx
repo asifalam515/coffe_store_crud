@@ -4,10 +4,12 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AddCoffee from "./components/AddCoffee.jsx";
 import UpdateCoffee from "./components/UpdateCoffee.jsx";
+import App from "./App.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="text-5xl">Hello world!</div>,
+    element: <App></App>,
+    loader: () => fetch("http://localhost:5000/coffee"),
   },
   {
     path: "/addCoffee/",
