@@ -35,6 +35,7 @@ async function run() {
     // operation started
     const database = client.db("coffeeDB");
     const coffeeCollection = database.collection("coffees");
+    const userCollection = database.collection("user");
     // post
     app.post("/coffee", async (req, res) => {
       const newCoffee = req.body;
@@ -86,6 +87,18 @@ async function run() {
         },
       };
       const result = await coffeeCollection.updateOne(filter, coffee, options);
+      res.send(result);
+    });
+
+    // user related apis
+    app.post("/user", async (req, res) => {
+      const newUser = req.body;
+      const result = await userCollection.insertOne(newUser);
+      res.send(result);
+    });
+    app.get("/user", async (req, res) => {
+      const cursor = userCollection.find();
+      const result = await cursor.toArray();
       res.send(result);
     });
   } finally {
