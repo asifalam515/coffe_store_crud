@@ -48,7 +48,7 @@ const CaffeeCard = ({ coffee }) => {
           <div className="card-actions justify-end">
             <div className="join join-vertical flex flex-col gap-2 justify-center items-center ">
               <button className="btn btn-secondary m-2">View</button>
-              <Link to={`updateCoffee/${_id}`} className="btn btn-primary m-2">
+              <Link to={`coffee/${_id}`} className="btn btn-primary m-2">
                 Edit
               </Link>
               <button

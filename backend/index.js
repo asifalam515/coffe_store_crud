@@ -60,10 +60,32 @@ async function run() {
 
     // update coffee
     // step 1 :load specific coffee that you want to update
-    app.get("/updateCoffee/:id/", async (req, res) => {
+    app.get("/coffee/:id/", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await coffeeCollection.findOne(query);
+      res.send(result);
+    });
+    // step 2:update a specific document
+    app.put("/coffee/:id/", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updatedCoffee = req.body;
+
+      const coffee = {
+        $set: {
+          name: updatedCoffee.name,
+          quantity: updatedCoffee.quantity,
+          supplier: updatedCoffee.supplier,
+          taste: updatedCoffee.taste,
+
+          category: updatedCoffee.category,
+          photo: updatedCoffee.photo,
+          details: updatedCoffee.details,
+        },
+      };
+      const result = await coffeeCollection.updateOne(filter, coffee, options);
       res.send(result);
     });
   } finally {
