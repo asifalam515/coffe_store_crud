@@ -108,6 +108,20 @@ async function run() {
       const result = await userCollection.deleteOne(query);
       res.send(result);
     });
+
+    // update user
+    app.patch("/user/", async (req, res) => {
+      const user = req.body;
+
+      const filter = { email: user.email };
+      const updateDoc = {
+        $set: {
+          lastLoggedAt: user.lastLoggedAt,
+        },
+      };
+      const result = await userCollection.updateOne(filter, updateDoc);
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
