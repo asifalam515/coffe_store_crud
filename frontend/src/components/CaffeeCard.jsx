@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-const CaffeeCard = ({ coffee }) => {
+const CaffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { photo, _id, name, quantity, supplier, taste, details } = coffee;
 
-  const handleDelete = (id) => {
-    console.log(id);
+  const handleDelete = (_id) => {
     // sweet alert
     Swal.fire({
       title: "Are you sure?",
@@ -28,6 +27,8 @@ const CaffeeCard = ({ coffee }) => {
                 text: "Your coffee has been deleted.",
                 icon: "success",
               });
+              const remaining = coffees.filter((cof) => cof._id !== _id);
+              setCoffees(remaining);
             }
           });
         console.log("Delete Confirm");
